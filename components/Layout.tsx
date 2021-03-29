@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import UnauthorizedNavMenu from './UnauthorizedNavMenu'
+import 'semantic-ui-css/semantic.min.css'
+
 
 type Props = {
   children?: ReactNode
@@ -15,6 +18,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
+      <UnauthorizedNavMenu></UnauthorizedNavMenu>
       <nav>
         <Link href="/">
           <a>Home</a>
