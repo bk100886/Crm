@@ -12,8 +12,11 @@ const AboutPage = () => (
         <a>Перейти</a>
       </Link>
     </p>
-    <Modal size="fullscreen" trigger={<Button primary>Привет</Button>}>
-    Привет всем
+    <Modal trigger={<Button primary>Привет</Button>}>
+    <p>Все очень здорово!</p>
+    <p>Все очень здорово!</p>
+    <p>Все очень здорово!</p>
+    <p>Люблю мою лапочку!</p>
     </Modal>
     
   </Layout>
