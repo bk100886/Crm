@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default class UnauthorizedNavMenu extends Component {
   render() {
     return (
-      <Menu>
+      <Menu color="blue" inverted>
         <Menu.Item name='Home' link>
           <Icon name="globe"></Icon>
             <Link href="/">
