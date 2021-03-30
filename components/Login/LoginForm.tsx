@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Message, Segment } from 'semantic-ui-react'
 
 export default class LoginForm extends React.Component{
   constructor(props:any){
