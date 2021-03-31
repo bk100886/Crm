@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Header } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
+import Styles from './Layout.module.css'
 import Head from 'next/head'
 import UnauthorizedNavMenu from './UnauthorizedNavMenu'
 
@@ -24,7 +25,7 @@ const Layout = ({ children, title = 'This is the default title', h1 = title }: P
       <nav>
         <UnauthorizedNavMenu></UnauthorizedNavMenu>
       </nav>
-      <Header as='h1' textAlign="center">{h1}</Header>
+      <Header as='h1' textAlign="center" className={Styles.h1}>{h1}</Header>
     </header>
     {children}
     <footer>
