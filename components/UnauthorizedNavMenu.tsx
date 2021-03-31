@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
-import Link from 'next/link'
 import Router from 'next/router'
 
 export default class UnauthorizedNavMenu extends Component {
