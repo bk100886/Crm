@@ -1,22 +1,37 @@
 import React from 'react'
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Form, Grid, Message, Segment, Icon, Container } from 'semantic-ui-react'
+import { Button, Form, Grid, Message, Segment, Container } from 'semantic-ui-react'
 
 interface IProps {
   
 }
 
 interface IState {
-  errorMessage: string
+  errorMessage: string,
+  email:string,
+  password:string
 }
 
 export default class LoginForm extends React.Component<IProps, IState>{
   constructor(props:IProps){
     super(props)
     this.state={
-      errorMessage:""
+      errorMessage:"",
+      email:"",
+      password:""
     }
+    this.onEmailChange = this.onEmailChange.bind(this);
+  }
+
+  onSubmit=()=>{
+    this.setState({errorMessage:"Не удалось выполнить вход с указанными учетными данными"});
+  }
+  onEmailChange=(value:string)=>{
+    this.setState({email:value});
+  }
+  onPasswordChange=(value:string)=>{
+    this.setState({email:value});
   }
   
   render() {
@@ -28,13 +43,17 @@ export default class LoginForm extends React.Component<IProps, IState>{
           {this.state.errorMessage==="" ? null :
           <Message error>
             <Container textAlign="left">
-              <Icon name='exclamation' />
               {this.state.errorMessage}
             </Container>
           </Message>
           }
           <Form>
-              <Form.Input fluid icon='user' iconPosition='left' placeholder='Электронная почта' required />
+              <Form.Input 
+                fluid icon='user'
+                iconPosition='left' 
+                placeholder='Электронная почта'
+                required
+                onChange={event=>this.onEmailChange(event.target.value)} />
               <Form.Input
                 fluid
                 icon='lock'
@@ -42,8 +61,12 @@ export default class LoginForm extends React.Component<IProps, IState>{
                 placeholder='Пароль'
                 type='password'
                 required
+                onChange={event=>this.onPasswordChange(event.target.value)}
               />
-              <Button primary fluid>
+              <Button 
+                primary 
+                fluid
+                onClick={()=>this.onSubmit()}>
                 Войти
               </Button>
           </Form>
