@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
 import Link from 'next/link'
+import Router from 'next/router'
 
 export default class UnauthorizedNavMenu extends Component {
   render() {
@@ -11,24 +12,24 @@ export default class UnauthorizedNavMenu extends Component {
             CRM
         </Menu.Item>
         
-        <Link href="/">
-            <Menu.Item name='Index' link>
-              <a>Главная</a>
-            </Menu.Item>
-        </Link>
+        <Menu.Item 
+            name='Главная' 
+            link
+            onClick={()=>Router.push('/')}>
+        </Menu.Item>
 
         <Menu.Menu position='right'>
-          <Link href="/register">
-            <Menu.Item name='Register' link>
-              <a>Регистрация</a>
-            </Menu.Item>
-          </Link>
-
-          <Link href="/login">
-            <Menu.Item name='SignUp' link>
-              <a>Вход</a>
-            </Menu.Item>
-          </Link>
+          <Menu.Item 
+            name='Регистрация' 
+            link
+            onClick={()=>Router.push('/register')}>
+          </Menu.Item>
+          
+          <Menu.Item 
+            name='Вход' 
+            link
+            onClick={()=>Router.push('/login')}>
+          </Menu.Item>
         </Menu.Menu>
       </Menu>
     )
