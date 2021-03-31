@@ -1,9 +1,9 @@
 import Layout from '../components/Layout'
-import LoginForm from '../components/Login/LoginForm'
+import RegisterForm from '../components/Register/RegisterForm'
 
 const RegisterPage = () => (
   <Layout title="Регистрация в системе">
-    <LoginForm/>
+    <RegisterForm/>
   </Layout>
 )
 

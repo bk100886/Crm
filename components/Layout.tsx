@@ -18,13 +18,13 @@ const Layout = ({ children, title = 'This is the default title', h1 = title }: P
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      {/* <link rel="stylesheet" href="/public/site.css"/> */}
     </Head>
     <header>
       <nav>
         <UnauthorizedNavMenu></UnauthorizedNavMenu>
       </nav>
       <Header as='h1' textAlign="center">{h1}</Header>
-      <br/>
     </header>
     {children}
     <footer>

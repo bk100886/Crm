@@ -6,32 +6,29 @@ export default class UnauthorizedNavMenu extends Component {
   render() {
     return (
       <Menu color="blue" inverted>
-        <Menu.Item name='Home' link>
-          <Icon name="globe"></Icon>
-            <Link href="/">
+        <Menu.Item header>
+            <Icon name="globe"></Icon>
+            CRM
+        </Menu.Item>
+        
+        <Link href="/">
+            <Menu.Item name='Index' link>
               <a>Главная</a>
-            </Link>
-        </Menu.Item>
-
-        <Menu.Item name='About' link>
-          <Link href="/about">
-            <a>About Us</a>
-          </Link>
-        </Menu.Item>
-
-        <Menu.Item name='Users' link>
-          <Link href="/users">
-            <a>Users</a>
-          </Link>
-        </Menu.Item>
+            </Menu.Item>
+        </Link>
 
         <Menu.Menu position='right'>
-          <Menu.Item name='SignUp'>
-            <Link href="/login">
-              <a>Войти</a>
-            </Link>
-          </Menu.Item>
+          <Link href="/register">
+            <Menu.Item name='Register' link>
+              <a>Регистрация</a>
+            </Menu.Item>
+          </Link>
 
+          <Link href="/login">
+            <Menu.Item name='SignUp' link>
+              <a>Вход</a>
+            </Menu.Item>
+          </Link>
         </Menu.Menu>
       </Menu>
     )
