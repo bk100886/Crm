@@ -1,9 +1,9 @@
 import Layout from '../components/Layout'
-import LoginForm from '../components/Login/LoginForm'
+import RecoverForm from '../components/Recover/RecoverForm'
 
 const RecoverPage = () => (
-  <Layout title="Восстановление пароля">
-    <LoginForm/>
+  <Layout title="Восстановление доступа">
+    <RecoverForm/>
   </Layout>
 )
 

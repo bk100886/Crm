@@ -73,6 +73,9 @@ export default class LoginForm extends React.Component<IProps, IState>{
           <Message>
               Впервые в системе? <Link href="/register"><a>Зарегистироваться</a></Link>
           </Message>
+          <Message>
+              <Link href="/recover"><a>Восстановить доступ</a></Link>
+          </Message>
           </Segment>
         </Grid.Column>
       </Grid>
