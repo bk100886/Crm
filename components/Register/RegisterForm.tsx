@@ -1,7 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Form, Grid, Message, Segment, Container } from 'semantic-ui-react'
+import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
 import { validateEmail } from '../../utils/EmailValidator'
 interface IProps {
   
@@ -115,9 +114,6 @@ export default class RegisterForm extends React.Component<IProps, IState>{
               Зарегистироваться
             </Button>
           </Form>
-          <Message>
-              Уже зарегистрированы? <Link href="/login"><a>Войти</a></Link>
-          </Message>
           </Segment>
       </div>
     );
