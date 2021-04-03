@@ -8,7 +8,7 @@ const RegisterPage = () => (
     <Grid textAlign='center'  verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <RegisterForm/>
-        <Segment style={{"padding-top":0}}>
+        <Segment basic style={{"padding-top":0}}>
           <Message>
             Уже зарегистрированы? <Link href="/login"><a>Войти</a></Link>
           </Message>
