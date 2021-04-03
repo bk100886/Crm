@@ -65,8 +65,6 @@ export default class RegisterForm extends React.Component<IProps, IState>{
   render() {
     return (
       <div>
-        <Grid textAlign='center'  verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 450 }}>
         <Segment basic>
           {this.state.errorMessage==="" ? null :
           <Message error>
@@ -121,10 +119,7 @@ export default class RegisterForm extends React.Component<IProps, IState>{
               Уже зарегистрированы? <Link href="/login"><a>Войти</a></Link>
           </Message>
           </Segment>
-        </Grid.Column>
-      </Grid>
       </div>
-      
     );
   }
 
