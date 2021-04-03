@@ -32,7 +32,7 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="blue" onClick={()=>Router.push('/operator')}>
+            <Card color="yellow" onClick={()=>Router.push('/operator')}>
               <Card.Content>
                 <Card.Header>Оператор прачечной</Card.Header>
                 <Card.Description>
@@ -40,7 +40,7 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="orange" onClick={()=>Router.push('/owner')}>
+            <Card color="blue" onClick={()=>Router.push('/owner')}>
               <Card.Content>
                 <Card.Header>Владелец прачечной</Card.Header>
                 <Card.Description>
