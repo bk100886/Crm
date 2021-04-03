@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Form, Grid, Message, Segment, Container } from 'semantic-ui-react'
+import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
 
 interface IProps {
   
@@ -37,9 +37,7 @@ export default class LoginForm extends React.Component<IProps, IState>{
   render() {
     return (
       <div>
-        <Grid textAlign='center'  verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 450 }}>
-        <Segment basic>
+       <Segment basic>
           {this.state.errorMessage==="" ? null :
           <Message error>
             <Container textAlign="left">
@@ -77,10 +75,7 @@ export default class LoginForm extends React.Component<IProps, IState>{
               <Link href="/recover"><a>Восстановить доступ</a></Link>
           </Message>
           </Segment>
-        </Grid.Column>
-      </Grid>
       </div>
-      
     );
   }
 

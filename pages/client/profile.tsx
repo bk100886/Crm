@@ -1,15 +1,14 @@
-import Layout from '../components/Layout'
-import LoginForm from '../components/Login/LoginForm'
+import Layout from '../../components/Client/Layout'
 import {Grid} from 'semantic-ui-react'
 
-const LoginPage = () => (
+const ProfilePage = () => (
   <Layout title="Вход в систему">
      <Grid textAlign='center'  verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <LoginForm/>
+          
         </Grid.Column>
       </Grid>
   </Layout>
 )
 
-export default LoginPage
+export default ProfilePage
