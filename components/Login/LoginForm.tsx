@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import Router from 'next/router'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
 
@@ -10,7 +10,8 @@ interface IProps {
 interface IState {
   errorMessage: string,
   email:string,
-  password:string
+  password:string,
+  loading:boolean
 }
 
 export default class LoginForm extends React.Component<IProps, IState>{
@@ -19,25 +20,34 @@ export default class LoginForm extends React.Component<IProps, IState>{
     this.state={
       errorMessage:"",
       email:"",
-      password:""
+      password:"",
+      loading:false
     }
     this.onEmailChange = this.onEmailChange.bind(this);
   }
 
   onSubmit=()=>{
-    this.setState({errorMessage:"Не удалось выполнить вход с указанными учетными данными"});
+    if (this.state.email==="" || this.state.password===""){
+      return;
+    }
+    this.setState({errorMessage:""});
+    this.setState({loading:true});
+    setTimeout(() => {
+      Router.push('/interface');
+    }, 2000);
+    //this.setState({errorMessage:"Не удалось выполнить вход с указанными учетными данными"});
   }
   onEmailChange=(value:string)=>{
     this.setState({email:value});
   }
   onPasswordChange=(value:string)=>{
-    this.setState({email:value});
+    this.setState({password:value});
   }
   
   render() {
     return (
       <div>
-       <Segment basic>
+       <Segment basic loading={this.state.loading}>
           {this.state.errorMessage==="" ? null :
           <Message error>
             <Container textAlign="left">
@@ -68,12 +78,6 @@ export default class LoginForm extends React.Component<IProps, IState>{
                 Войти
               </Button>
           </Form>
-          <Message>
-              Впервые в системе? <Link href="/register"><a>Зарегистироваться</a></Link>
-          </Message>
-          <Message>
-              <Link href="/recover"><a>Восстановить доступ</a></Link>
-          </Message>
           </Segment>
       </div>
     );
