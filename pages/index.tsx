@@ -2,7 +2,7 @@
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function IndexPage() {
-  const [ session, loading ] = useSession()
+  const [ session ] = useSession()
 
   return <>
     {!session && <>
