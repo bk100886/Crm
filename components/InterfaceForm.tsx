@@ -5,7 +5,7 @@ import { useSession} from 'next-auth/client'
 
 export default function InterfaceForm(){
   const router = useRouter();
-  const [session, loading ] = useSession();
+  const [session] = useSession();
 
   if(!session) {
     return <p>Signed in as </p>
