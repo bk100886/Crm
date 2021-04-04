@@ -1,68 +1,48 @@
-import React, {  } from 'react'
-import Router from 'next/router'
+import {useState} from 'react'
+import {useRouter} from 'next/router';
 import 'semantic-ui-css/semantic.min.css'
-import { Container, Message, Grid, Segment } from 'semantic-ui-react'
+import { Container, Message, Segment } from 'semantic-ui-react'
 import CodeSendForm from './CodeSendForm'
 import PasswordChangeForm from './PasswordChangeForm'
-interface IProps {
 
-}
 
-interface IState {
-    passwordChanged:boolean,
-    email:string
-}
-
-export default class RecoverForm extends React.Component<IProps, IState>{
-  constructor(props:IProps){
-    super(props)
-    this.state={
-      passwordChanged:false,
-      email:""
+export default function RecoverForm(){
+  const [email, setEmail] = useState("");
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  const router = useRouter();
+  let content;
+  if (email===""){
+    content=<CodeSendForm onSuccess={email=>setEmail(email)} />;
+  }
+  else
+  {
+    if (!passwordChanged){
+      content = <PasswordChangeForm 
+      email={email}
+      onSuccess={()=>setPasswordChanged(true)}
+      />
+    }
+    else{
+      setTimeout(() => {
+        router.push('/login');
+      }, 5000);
+      
+      content=<Segment basic>
+        <Container textAlign="left">
+          <Message success>
+            <strong>Пароль был успешно изменен. </strong>
+            Через пару секунд вы будете направлены на форму входа в систему
+          </Message> 
+        </Container>
+      </Segment>
+      
     }
   }
-
-  onCodeSend=(email:string)=>{
-    this.setState({email:email})
-  }
-
-  onPasswordChange=()=>{
-    this.setState({passwordChanged:true})
-  }
-  render() {
-    let content;
-    if (this.state.email===""){
-      content=<CodeSendForm onSuccess={email=>this.onCodeSend(email)} />;
-    }else{
-      if (!this.state.passwordChanged){
-        content = <PasswordChangeForm 
-        email={this.state.email}
-        onSuccess={()=>this.onPasswordChange()}
-        />
-      }else{
-        setTimeout(() => {
-          Router.push('/login');
-        }, 5000);
-       
-        content=
-        <Segment basic>
-          <Container textAlign="left">
-            <Message success>
-              <strong>Пароль был успешно изменен.</strong>
-              Через пару секунд вы будете направлены на форму входа в систему
-            </Message> 
-          </Container>
-        </Segment>
-        
-      }
-    }
-    return (
-       <Grid textAlign='center'  verticalAlign='middle'>
-          <Grid.Column style={{ maxWidth: 450 }}>
-            {content}
-          </Grid.Column>
-        </Grid>
-    );
-  }
-
+  return(
+    <div>
+      {content}
+    </div>
+  );
 }
+
+

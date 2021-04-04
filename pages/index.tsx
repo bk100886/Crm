@@ -1,8 +1,10 @@
 import Layout from '../components/Layout'
+import Test from '../components/Login/test'
 
-const IndexPage = () => (
+const TestPage = () => (
   <Layout title="Главная">
+    <Test></Test>
   </Layout>
 )
 
-export default IndexPage
+export default TestPage

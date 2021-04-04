@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "dna-responsive-nav": "^1.0.12",
+    "eslint-plugin-react-hooks": "0.0.0-b4f119cdf",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3"
+    "semantic-ui-react": "^2.0.3",
+    "swr": "^0.5.5"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

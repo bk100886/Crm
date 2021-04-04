@@ -1,57 +1,72 @@
 import React from 'react'
-import Router from 'next/router'
+import {useRouter} from 'next/router'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
+import {useState} from 'react'
+import * as api from '../../utils/api'
+import { User } from '../../interfaces'
 
-interface IProps {
+
+export default function LoginForm(){
+  const router = useRouter();
+  //const fetcher = (url:string) => fetch(url).then(res => res.json());
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   
-}
-
-interface IState {
-  errorMessage: string,
-  email:string,
-  password:string,
-  loading:boolean
-}
-
-export default class LoginForm extends React.Component<IProps, IState>{
-  constructor(props:IProps){
-    super(props)
-    this.state={
-      errorMessage:"",
-      email:"",
-      password:"",
-      loading:false
-    }
-    this.onEmailChange = this.onEmailChange.bind(this);
-  }
-
-  onSubmit=()=>{
-    if (this.state.email==="" || this.state.password===""){
+  async function onSubmit(){
+    setErrorMessage("");
+    if (email==="" || password===""){
       return;
     }
-    this.setState({errorMessage:""});
-    this.setState({loading:true});
-    setTimeout(() => {
-      Router.push('/interface');
-    }, 2000);
-    //this.setState({errorMessage:"Не удалось выполнить вход с указанными учетными данными"});
-  }
-  onEmailChange=(value:string)=>{
-    this.setState({email:value});
-  }
-  onPasswordChange=(value:string)=>{
-    this.setState({password:value});
-  }
+    setLoading(true);
+    try {
+      const result = await api.post<string, User[]>("/api/users", "");
+      alert(result[2].name);
+      router.push('/interface');
+    } catch (error) {
+      setErrorMessage("Не удалось выполнить вход с указанными учетными данными");
+      setLoading(false);
+    }
+    
+    // fetcher("http")
+    // .then(
+    //   result=>{
+    //     alert(JSON.stringify(result));
+    //   }
+    // )
+    // .catch(
+    //   reason=>{
+    //     alert(JSON.stringify(reason));
+    //   }
+    // )
+    // const { data, error } = useSWR(
+    //   "https://api.github.com/repos/vercel/swr",
+    //   fetcher
+    // );
   
-  render() {
-    return (
-      <div>
-       <Segment basic loading={this.state.loading}>
-          {this.state.errorMessage==="" ? null :
+    // if (error) {
+    //   setErrorMessage("Не удалось выполнить вход с указанными учетными данными");
+    //   return;
+    // }
+    // if (!data) {
+    //   setLoading(true);
+    //   return;
+    // }
+    
+    // setTimeout(() => {
+    //   router.push('/interface');
+    // }, 2000);
+  }
+
+  return (
+    <div>
+       <Segment basic loading={loading}>
+          {errorMessage==="" ? null :
           <Message error>
             <Container textAlign="left">
-              {this.state.errorMessage}
+              {errorMessage}
             </Container>
           </Message>
           }
@@ -61,7 +76,7 @@ export default class LoginForm extends React.Component<IProps, IState>{
                 iconPosition='left' 
                 placeholder='Электронная почта'
                 required
-                onChange={event=>this.onEmailChange(event.target.value)} />
+                onChange={event=>setEmail(event.target.value)} />
               <Form.Input
                 fluid
                 icon='lock'
@@ -69,18 +84,16 @@ export default class LoginForm extends React.Component<IProps, IState>{
                 placeholder='Пароль'
                 type='password'
                 required
-                onChange={event=>this.onPasswordChange(event.target.value)}
+                onChange={event=>setPassword(event.target.value)}
               />
               <Button 
                 primary 
                 fluid
-                onClick={()=>this.onSubmit()}>
+                onClick={()=>onSubmit()}>
                 Войти
               </Button>
           </Form>
           </Segment>
       </div>
-    );
-  }
-
+  );
 }

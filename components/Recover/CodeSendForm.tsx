@@ -1,101 +1,82 @@
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
+import {useState} from 'react'
 import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
-import { validateEmail } from '../../utils/EmailValidator'
+import * as validators from '../../utils/validator'
 
 interface IProps {
   onSuccess:(email:string) => void;
 }
 
-interface IState {
-    errorMessage: string,
-    email:string,
-    sent:boolean,
-    loading:boolean
-}
+export default function CodeSendForm(props:IProps){
+  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-export default class CodeSendForm extends React.Component<IProps, IState>{
-    constructor(props:IProps){
-    super(props)
-    this.state={
-        errorMessage:"",
-        email:"",
-        sent:false,
-        loading:false
-    }
-  }
-
-  onSendClick=()=>{
-    this.setState({errorMessage:""});
-    if (this.state.email===""){
+  const onSendClick=()=>{
+    setErrorMessage("");
+    if (email===""){
       return;
     }
-    if (!validateEmail(this.state.email)){
-      this.setState({errorMessage:"Некорректный формат адреса электронной почты"});
+    const emailValidationResult = validators.validateEmail(email);
+    if (emailValidationResult!==""){
+      setErrorMessage(emailValidationResult);
       return;
     }
-    this.setState({loading:true});
+    setLoading(true);
     setTimeout(() => {
-      this.setState({sent:true});
-      this.setState({loading:false});
+      setSent(true);
+      setLoading(false);
     }, 2000);
-    
   }
+  return(
+    <div>
+      {sent ?
+        <Segment basic>
+          <Message success>
+            <Container textAlign="left">
+              Код безопасности успешно отправлен на электронную почту по адресу <strong>{email}</strong>
+            </Container>
+          </Message>
+          <Button 
+              primary 
+              fluid
+              onClick={()=>props.onSuccess(email)}>
+              Смена пароля
+            </Button>
+        </Segment>
+        :
+        <Segment basic loading={loading}>
+          {errorMessage==="" ? null :
+          <Message error>
+            <Container textAlign="left">
+              {errorMessage}
+            </Container>
+          </Message>
+          }
+          <Message info>
+            <Container textAlign="left">
+              Укажите заданный при регистрации адрес электронной почты. На этот адрес будет отправлен код безопасности для восстанановления доступа.
+            </Container>
+          </Message>
+          <Form>
+            <Form.Input 
+              fluid icon='mail' 
+              iconPosition='left' 
+              placeholder='Электронная почта' 
+              required 
+              onChange={event=>setEmail(event.target.value)}/>
 
-  onEmailChange=(value:string)=>{
-    this.setState({email:value});
-  }
-  
-  render() {
-    return (
-      <div>
-           {this.state.sent ?
-              <Segment basic>
-                <Message success>
-                  <Container textAlign="left">
-                    Код безопасности успешно отправлен на электронную почту по адресу <strong>{this.state.email}</strong>
-                  </Container>
-                </Message>
-                <Button 
-                    primary 
-                    fluid
-                    onClick={()=>this.props.onSuccess(this.state.email)}>
-                    Смена пароля
-                  </Button>
-              </Segment>
-              :
-              <Segment basic loading={this.state.loading}>
-                {this.state.errorMessage==="" ? null :
-                <Message error>
-                  <Container textAlign="left">
-                    {this.state.errorMessage}
-                  </Container>
-                </Message>
-                }
-                <Message info>
-                  <Container textAlign="left">
-                    Укажите заданный при регистрации адрес электронной почты. На этот адрес будет отправлен код безопасности для восстанановления доступа.
-                  </Container>
-                </Message>
-                <Form>
-                  <Form.Input 
-                    fluid icon='mail' 
-                    iconPosition='left' 
-                    placeholder='Электронная почта' 
-                    required 
-                    onChange={event=>this.onEmailChange(event.target.value)}/>
-
-                  <Button 
-                    primary 
-                    fluid
-                    onClick={()=>this.onSendClick()}>
-                    Отправить код
-                  </Button>
-                </Form>
-                </Segment>
-            }
-      </div>
-    );
-  }
-
+            <Button 
+              primary 
+              fluid
+              onClick={()=>onSendClick()}>
+              Отправить код
+            </Button>
+          </Form>
+          </Segment>
+      }
+    </div>
+  );
 }
