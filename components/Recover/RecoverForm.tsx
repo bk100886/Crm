@@ -5,7 +5,6 @@ import { Container, Message, Segment } from 'semantic-ui-react'
 import CodeSendForm from './CodeSendForm'
 import PasswordChangeForm from './PasswordChangeForm'
 
-
 export default function RecoverForm(){
   const [email, setEmail] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
