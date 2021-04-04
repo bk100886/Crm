@@ -1,10 +1,17 @@
-import Layout from '../components/Layout'
-import Test from '../components/Login/test'
 
-const TestPage = () => (
-  <Layout title="Главная">
-    <Test></Test>
-  </Layout>
-)
+import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default TestPage
+export default function IndexPage() {
+  const [ session, loading ] = useSession()
+
+  return <>
+    {!session && <>
+      Not signed in <br/>
+      <button onClick={() => signIn()}>Sign in</button>
+    </>}
+    {session && <>
+      Signed in as {session.user.email} <br/>
+      <button onClick={() => signOut()}>Sign out</button>
+    </>}
+  </>
+}

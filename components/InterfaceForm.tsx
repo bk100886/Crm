@@ -1,11 +1,16 @@
 import {useRouter} from 'next/router'
 import 'semantic-ui-css/semantic.min.css'
 import { Card, Segment } from 'semantic-ui-react'
-
+import { useSession} from 'next-auth/client'
 
 export default function InterfaceForm(){
   const router = useRouter();
+  const [session, loading ] = useSession();
 
+  if(!session) {
+    return <p>Signed in as </p>
+  }
+  
   return(
     <div>
         <Segment basic>
