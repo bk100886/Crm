@@ -2,6 +2,7 @@ import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import {useState} from 'react'
 import { Button, Form, Message, Segment, Container } from 'semantic-ui-react'
+import * as validators from '../../utils/validator'
 interface IProps {
     email:string
     onSuccess:()=>void
@@ -18,13 +19,22 @@ export default function PasswordChangeForm(props:IProps){
     if (code=="" || password1=="" ||password2==""){
           return;
     }
-    if (password1!==password2){
-      setErrorMessage("Пароли не совпадают");
+    const passwordValidationResult = validators.validatePassword(password1);
+    if (passwordValidationResult!==""){
+      setErrorMessage(passwordValidationResult);
       setPassword1("");
       setPassword2("");
       return;
     }
 
+    const passwordsCompareResult = validators.validatePasswords(password1, password2);
+    if (passwordsCompareResult!==""){
+      setErrorMessage(passwordsCompareResult);
+      setPassword1("");
+      setPassword2("");
+      return;
+    }
+  
     setLoading(true);
     setTimeout(() => {
       props.onSuccess();
