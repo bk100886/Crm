@@ -1,30 +1,16 @@
-import React from 'react'
-import Router from 'next/router'
+import {useRouter} from 'next/router'
 import 'semantic-ui-css/semantic.min.css'
 import { Card, Segment } from 'semantic-ui-react'
 
-interface IProps {
-  
-}
 
-interface IState {
-  
-}
+export default function InterfaceForm(){
+  const router = useRouter();
 
-export default class InterfaceForm extends React.Component<IProps, IState>{
-  constructor(props:IProps){
-    super(props)
-    this.state={
-     
-    }
- }
-  
-  render() {
-    return (
-      <div>
+  return(
+    <div>
         <Segment basic>
           <Card.Group centered>
-            <Card color="green" onClick={()=>Router.push('/client')}>
+            <Card color="green" onClick={()=>router.push('/client')}>
               <Card.Content>
                 <Card.Header>Клиент</Card.Header>
                 <Card.Description>
@@ -32,7 +18,7 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="yellow" onClick={()=>Router.push('/operator')}>
+            <Card color="yellow" onClick={()=>router.push('/operator')}>
               <Card.Content>
                 <Card.Header>Оператор прачечной</Card.Header>
                 <Card.Description>
@@ -40,7 +26,7 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="blue" onClick={()=>Router.push('/owner')}>
+            <Card color="blue" onClick={()=>router.push('/owner')}>
               <Card.Content>
                 <Card.Header>Владелец прачечной</Card.Header>
                 <Card.Description>
@@ -48,7 +34,7 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
                 </Card.Description>
               </Card.Content>
             </Card>
-            <Card color="red" onClick={()=>Router.push('/administrator')}>
+            <Card color="red" onClick={()=>router.push('/administrator')}>
               <Card.Content>
                 <Card.Header>Администратор Crm</Card.Header>
                 <Card.Description>
@@ -59,7 +45,8 @@ export default class InterfaceForm extends React.Component<IProps, IState>{
           </Card.Group>
         </Segment>
       </div>
-    );
-  }
-
+    
+  );
 }
+
+
